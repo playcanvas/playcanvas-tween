@@ -11,7 +11,7 @@ var tween = entity.tween(fromProperty).to(toProperty, speed, easing);
 tween.start();
 ```
 
-For example, this tweens the entity's local position with speed 1.0 and SineOut easing:
+For example, this tweens the entity's local position with speed 1.0 and `SineOut` easing:
 
 ```
 var tween = entity.tween(entity.getLocalPosition()).to({x: 10, y: 0, z: 0}, 1.0, pc.SineOut);
@@ -94,3 +94,38 @@ tween.yoyo(true).repeat(2);
 To reverse a tween call `tween.reverse()`.
 
 
+# Easing methods
+
+There are various easing methods you can use that change the way that values are interpolated. The available easing methods are:
+
+- `pc.Linear`
+- `pc.QuadraticIn`
+- `pc.QuadraticOut`
+- `pc.QuadraticInOut`
+- `pc.CubicIn`
+- `pc.CubicOut`
+- `pc.CubicInOut`
+- `pc.QuarticIn`
+- `pc.QuarticOut`
+- `pc.QuarticInOut`
+- `pc.QuinticIn`
+- `pc.QuinticOut`
+- `pc.QuinticInOut`
+- `pc.SineIn`
+- `pc.SineOut`
+- `pc.SineInOut`
+- `pc.ExponentialIn`
+- `pc.ExponentialOut`
+- `pc.ExponentialInOut`
+- `pc.CircularIn`
+- `pc.CircularOut`
+- `pc.CircularInOut`
+- `pc.BackIn`
+- `pc.BackOut`
+- `pc.BackInOut`
+- `pc.BounceIn`
+- `pc.BounceOut`
+- `pc.BounceInOut`
+- `pc.ElasticIn`
+- `pc.ElasticOut`
+- `pc.ElasticInOut`
