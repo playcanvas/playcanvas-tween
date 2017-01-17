@@ -21,8 +21,7 @@ tween.start();
 If you are dealing with rotations you should use `rotate` instead of `to`. For example:
 
 ```
-var toRotation = (new pc.Quat()).setFromEulerAngles(0, 90, 0);
-entity.tween(entity.getLocalRotation()).rotate(toRotation, 1.0, pc.Linear);
+entity.tween(entity.getLocalRotation()).rotate({x: 0, y: 180, z: 0}}, 1.0, pc.Linear);
 ```
 
 You can also tween properties of any other object not just entities. For example:
