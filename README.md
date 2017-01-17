@@ -18,11 +18,11 @@ var tween = entity.tween(entity.getLocalPosition()).to({x: 10, y: 0, z: 0}, 1.0,
 tween.start();
 ```
 
-In this example we tween the entity's local rotation:
+If you are dealing with rotations you should use `rotate` instead of `to`. For example:
 
 ```
 var toRotation = (new pc.Quat()).setFromEulerAngles(0, 90, 0);
-entity.tween(entity.getLocalRotation()).to(toRotation, 1.0, pc.Linear);
+entity.tween(entity.getLocalRotation()).rotate(toRotation, 1.0, pc.Linear);
 ```
 
 You can also tween properties of any other object not just entities. For example:
