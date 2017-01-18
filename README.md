@@ -7,11 +7,11 @@ This is a tween library for PlayCanvas. You can include `tween.js` in your Proje
 Tweening `pc.Entity` properties looks like this:
 
 ```
-var tween = entity.tween(fromProperty).to(toProperty, speed, easing);
+var tween = entity.tween(fromProperty).to(toProperty, duration, easing);
 tween.start();
 ```
 
-For example, this tweens the entity's local position with speed 1.0 and `SineOut` easing:
+For example, this tweens the entity's local position with duration 1.0 and `SineOut` easing:
 
 ```
 var tween = entity.tween(entity.getLocalPosition()).to({x: 10, y: 0, z: 0}, 1.0, pc.SineOut);
