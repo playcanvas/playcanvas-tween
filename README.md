@@ -178,3 +178,9 @@ There are various easing methods you can use that change the way that values are
 - `pc.ElasticIn`
 - `pc.ElasticOut`
 - `pc.ElasticInOut`
+
+# Tutorial
+
+You can find a tutorial with various use cases [here][1].
+
+[1]: http://developer.playcanvas.com/en/tutorials/tweening/
