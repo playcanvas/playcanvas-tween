@@ -53,45 +53,60 @@ entity
 .start();
 ```
 
-# `start()`
+# Methods
+
+## `start()`
 
 To start playing a tween call `tween.start()`.
 
-# `stop()`
+## `stop()`
 
 To stop a tween  call `tween.stop()`.
 
-# `pause()`
+## `pause()`
 
 To pause a tween call `tween.pause()`.
 
-# `resume()`
+## `resume()`
 
 To resume a paused tween call `tween.resume()`.
 
-# `delay(true / false)`
+## `delay(true / false)`
 
 To delay a tween call `tween.delay(duration)` where duration is in seconds.
 
-# `repeat(count)`
+## `repeat(count)`
 
 To repeat a tween `count` times call `tween.repeat(count)`.
 
-# `loop(true / false)`
+## `loop(true / false)`
 
 To loop a tween forever call `tween.loop(true)`.
 
-# `yoyo(true / false)`
+## `yoyo(true / false)`
 
 To make a tween play in reverse after it finishes call `tween.yoyo(true)`. Note that to actually see the tween play in reverse in the end, you have to either repeat the tween at least 2 times or set it to loop forever. E.g. to only play a tween from start to end and then from end to start 1 time you need to do:
 ```
 tween.yoyo(true).repeat(2);
 ```
 
-# `reverse()`
+## `reverse()`
 
 To reverse a tween call `tween.reverse()`.
 
+# Events
+
+## `update(dt)`
+
+This is fired on every update cycle. You can use this method to manually update something in your code using the tweened value.
+
+## `complete()`
+
+This is fired when the tween is finished. If the tween is looping the `loop` event is fired instead.
+
+## `loop()`
+
+This is fired whenever a looping tween finishes a cycle. This is fired instead of the `complete` event for looping tweens.
 
 # Easing methods
 
