@@ -6,27 +6,27 @@ This is a tween library for PlayCanvas. You can include `tween.js` in your Proje
 
 Tweening `pc.Entity` properties looks like this:
 
-```
+```javascript
 var tween = entity.tween(fromProperty).to(toProperty, duration, easing);
 tween.start();
 ```
 
 For example, this tweens the entity's local position with duration 1.0 and `SineOut` easing:
 
-```
+```javascript
 var tween = entity.tween(entity.getLocalPosition()).to({x: 10, y: 0, z: 0}, 1.0, pc.SineOut);
 tween.start();
 ```
 
 If you are dealing with rotations you should use `rotate` instead of `to`. For example:
 
-```
+```javascript
 entity.tween(entity.getLocalRotation()).rotate({x: 0, y: 180, z: 0}}, 1.0, pc.Linear);
 ```
 
 You can also tween properties of any other object not just entities. For example:
 
-```
+```javascript
 // some object with a property called 'value'
 var data = {
     value: 0
@@ -43,7 +43,7 @@ app.tween(data).to({value: 1}, 1.0, pc.BackOut);
 
 You can chain method calls for a tween. For example:
 
-```
+```javascript
 // delay, yoyo and loop tween
 entity
 .tween(entity.getLocalPosition()).to({x: 10, y: 0, z: 0}, 1.0, pc.SineOut)
@@ -86,7 +86,7 @@ To loop a tween forever call `tween.loop(true)`.
 ## `yoyo(true / false)`
 
 To make a tween play in reverse after it finishes call `tween.yoyo(true)`. Note that to actually see the tween play in reverse in the end, you have to either repeat the tween at least 2 times or set it to loop forever. E.g. to only play a tween from start to end and then from end to start 1 time you need to do:
-```
+```javascript
 tween.yoyo(true).repeat(2);
 ```
 
@@ -100,13 +100,48 @@ To reverse a tween call `tween.reverse()`.
 
 This is fired on every update cycle. You can use this method to manually update something in your code using the tweened value.
 
+E.g.
+
+```javascript
+var color = new pc.Color(1, 0, 0);
+
+var tween = app.tween(color).to(new pc.Color(0, 1, 1), 1, pc.Linear);
+tween.on('update', function (dt) {
+    material.diffuse = color;
+    material.update();
+});
+```
+
 ## `complete()`
 
 This is fired when the tween is finished. If the tween is looping the `loop` event is fired instead.
 
+E.g.
+
+```javascript
+entity
+.tween(entity.getLocalPosition())
+.to({x: 10, y: 0, z: 0}, 1, pc.Linear)
+.on('complete', function () {
+   console.log('tween completed');
+});
+```
+
 ## `loop()`
 
 This is fired whenever a looping tween finishes a cycle. This is fired instead of the `complete` event for looping tweens.
+
+E.g.
+
+```javascript
+entity
+.tween(entity.getLocalPosition())
+.to({x: 10, y: 0, z: 0}, 1, pc.Linear)
+.loop(true)
+.on('loop', function () {
+   console.log('tween loop');
+});
+```
 
 # Easing methods
 
