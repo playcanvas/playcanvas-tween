@@ -390,16 +390,8 @@ pc.extend(pc, function () {
 
             // if this is a entity property then we should dirty the transform
             if (this.entity) {
-                // dirtifying is changed since v0.214.2+ in engine
-                // so uncomment this line:
-                
-                // this.entity._dirtify(true);
-                
-                // and remove those two lines:
-                this.entity.dirtyLocal = true;
-                this.entity.dirtyWorld = true;
-                // up to here
-                
+                this.entity._dirtify(true);
+
                 if (this._slerp) {
                     this.entity.setLocalRotation(this._quat);
                 }
