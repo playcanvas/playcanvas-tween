@@ -392,6 +392,11 @@ pc.extend(pc, function () {
             if (this.entity) {
                 this.entity._dirtify(true);
 
+                // apply element property changes
+                if (this.element && this.entity.element) {
+                    this.entity.element[this.element] = this.target;
+                }
+
                 if (this._slerp) {
                     this.entity.setLocalRotation(this._quat);
                 }
@@ -678,9 +683,13 @@ pc.extend(pc, function () {
         };
 
         // Add pc.Entity#tween method
-        pc.Entity.prototype.tween = function (target) {
+        pc.Entity.prototype.tween = function (target, options) {
             var tween = this._app.tween(target);
             tween.entity = this;
+            if (options && options.element) {
+                // specifiy a element property to be updated
+                tween.element = element;
+            }
             return tween;
         };
     }
