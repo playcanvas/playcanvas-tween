@@ -686,6 +686,11 @@ pc.extend(pc, function () {
         pc.Entity.prototype.tween = function (target, options) {
             var tween = this._app.tween(target);
             tween.entity = this;
+
+            this.on('destroy', function () {
+                tween.stop();
+            });
+
             if (options && options.element) {
                 // specifiy a element property to be updated
                 tween.element = element;
