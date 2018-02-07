@@ -212,6 +212,8 @@ pc.extend(pc, function () {
         },
 
         start: function () {
+            var prop, _x, _y, _z;
+
             this.playing = true;
             this.complete = false;
             this.stopped = false;
@@ -225,7 +227,7 @@ pc.extend(pc, function () {
             }
 
             if (this._from) {
-                for (var prop in this._properties) {
+                for (prop in this._properties) {
                     this._sv[prop] = this._properties[prop];
                     this._ev[prop] = this.target[prop];
                 }
@@ -233,13 +235,13 @@ pc.extend(pc, function () {
                 if (this._slerp) {
                     this._toQuat.setFromEulerAngles(this.target.x, this.target.y, this.target.z);
 
-                    var _x = this._properties.x !== undefined ? this._properties.x : this.target.x;
-                    var _y = this._properties.y !== undefined ? this._properties.y : this.target.y;
-                    var _z = this._properties.z !== undefined ? this._properties.z : this.target.z;
+                    _x = this._properties.x !== undefined ? this._properties.x : this.target.x;
+                    _y = this._properties.y !== undefined ? this._properties.y : this.target.y;
+                    _z = this._properties.z !== undefined ? this._properties.z : this.target.z;
                     this._fromQuat.setFromEulerAngles(_x, _y, _z);
                 }
             } else {
-                for (var prop in this._properties) {
+                for (prop in this._properties) {
                     this._sv[prop] = this.target[prop];
                     this._ev[prop] = this._properties[prop];
                 }
@@ -247,9 +249,9 @@ pc.extend(pc, function () {
                 if (this._slerp) {
                     this._fromQuat.setFromEulerAngles(this.target.x, this.target.y, this.target.z);
 
-                    var _x = this._properties.x !== undefined ? this._properties.x : this.target.x;
-                    var _y = this._properties.y !== undefined ? this._properties.y : this.target.y;
-                    var _z = this._properties.z !== undefined ? this._properties.z : this.target.z;
+                    _x = this._properties.x !== undefined ? this._properties.x : this.target.x;
+                    _y = this._properties.y !== undefined ? this._properties.y : this.target.y;
+                    _z = this._properties.z !== undefined ? this._properties.z : this.target.z;
                     this._toQuat.setFromEulerAngles(_x, _y, _z);
                 }
             }
