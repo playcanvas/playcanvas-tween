@@ -694,8 +694,8 @@ pc.extend(pc, function () {
             });
 
             if (options && options.element) {
-                // specifiy a element property to be updated
-                tween.element = element;
+                // specifiy an element property to be updated
+                tween.element = options.element;
             }
             return tween;
         };
