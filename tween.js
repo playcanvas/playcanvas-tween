@@ -669,35 +669,41 @@ pc.extend(pc, function () {
     };
 }());
 
-// Create a default tween manager on the application
+// Expose prototype methods and create a default tween manager on the application
 (function () {
-    var application = pc.Application.getApplication();
-    if (application) {
-        // create tween manager and update it
-        application._tweenManager = new pc.TweenManager(application);
-        application.on("update", function (dt) {
-            application._tweenManager.update(dt);
+    // Add pc.Application#addTweenManager method
+    pc.Application.prototype.addTweenManager = function () {
+        this._tweenManager = new pc.TweenManager(this);
+
+        this.on("update", function (dt) {
+            this._tweenManager.update(dt);
+        });
+    };
+
+    // Add pc.Application#tween method
+    pc.Application.prototype.tween = function (target) {
+        return new pc.Tween(target, this._tweenManager);
+    };
+
+    // Add pc.Entity#tween method
+    pc.Entity.prototype.tween = function (target, options) {
+        var tween = this._app.tween(target);
+        tween.entity = this;
+
+        this.on('destroy', function () {
+            tween.stop();
         });
 
-        // Add pc.Application#tween method
-        pc.Application.prototype.tween = function (target) {
-            return new pc.Tween(target, this._tweenManager);
-        };
+        if (options && options.element) {
+            // specifiy a element property to be updated
+            tween.element = element;
+        }
+        return tween;
+    };
 
-        // Add pc.Entity#tween method
-        pc.Entity.prototype.tween = function (target, options) {
-            var tween = this._app.tween(target);
-            tween.entity = this;
-
-            this.on('destroy', function () {
-                tween.stop();
-            });
-
-            if (options && options.element) {
-                // specifiy an element property to be updated
-                tween.element = options.element;
-            }
-            return tween;
-        };
+    // Create a default tween manager on the application
+    var application = pc.Application.getApplication();
+    if (application) {
+        application.addTweenManager();
     }
 })();
