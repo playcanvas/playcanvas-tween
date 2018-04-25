@@ -71,7 +71,7 @@ To pause a tween call `tween.pause()`.
 
 To resume a paused tween call `tween.resume()`.
 
-## `delay(true / false)`
+## `delay(duration)`
 
 To delay a tween call `tween.delay(duration)` where duration is in seconds.
 
