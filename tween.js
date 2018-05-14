@@ -87,28 +87,51 @@ pc.extend(pc, function () {
         this._ev = {}; // end values
     };
 
+    var _parseProperties = function (properties) {
+        var _properties;
+        if (properties instanceof pc.Vec2) {
+            _properties = {
+                x: properties.x,
+                y: properties.y
+            };
+        } else if (properties instanceof pc.Vec3) {
+            _properties = {
+                x: properties.x,
+                y: properties.y,
+                z: properties.z
+            };
+        } else if (properties instanceof pc.Vec4) {
+            _properties = {
+                x: properties.x,
+                y: properties.y,
+                z: properties.z,
+                w: properties.w
+            };
+        } else if (properties instanceof pc.Quat) {
+            _properties = {
+                x: properties.x,
+                y: properties.y,
+                z: properties.z,
+                w: properties.w
+            };
+        } else if (properties instanceof pc.Color) {
+            _properties = {
+                r: properties.r,
+                g: properties.g,
+                b: properties.b,
+            };
+            if (properties.a !== undefined) {
+                _properties.a = properties.a;
+            }
+        } else {
+            _properties = properties;
+        }
+        return _properties;
+    }
     Tween.prototype = {
         // properties - js obj of values to update in target
         to: function (properties, duration, easing, delay, repeat, yoyo) {
-            if (properties instanceof pc.Vec3) {
-                this._properties = {
-                    x: properties.x,
-                    y: properties.y,
-                    z: properties.z
-                };
-            } else if (properties instanceof pc.Color) {
-                this._properties = {
-                    r: properties.r,
-                    g: properties.g,
-                    b: properties.b,
-                };
-                if (properties.a !== undefined) {
-                    this._properties.a = properties.a;
-                }
-            } else {
-                this._properties = properties;
-            }
-
+            this._properties = _parseProperties(properties);
             this.duration = duration;
 
             if (easing) this.easing = easing;
@@ -127,25 +150,7 @@ pc.extend(pc, function () {
         },
 
         from: function (properties, duration, easing, delay, repeat, yoyo) {
-            if (properties instanceof pc.Vec3) {
-                this._properties = {
-                    x: properties.x,
-                    y: properties.y,
-                    z: properties.z
-                };
-            } else if (properties instanceof pc.Color) {
-                this._properties = {
-                    r: properties.r,
-                    g: properties.g,
-                    b: properties.b,
-                };
-                if (properties.a !== undefined) {
-                    this._properties.a = properties.a;
-                }
-            } else {
-                this._properties = properties;
-            }
-
+            this._properties = _parseProperties(properties);
             this.duration = duration;
 
             if (easing) this.easing = easing;
@@ -166,31 +171,7 @@ pc.extend(pc, function () {
         },
 
         rotate: function (properties, duration, easing, delay, repeat, yoyo) {
-            if (properties instanceof pc.Quat) {
-                this._properties = {
-                    x: properties.x,
-                    y: properties.y,
-                    z: properties.z,
-                    w: properties.w
-                };
-            } else if (properties instanceof pc.Vec3) {
-                this._properties = {
-                    x: properties.x,
-                    y: properties.y,
-                    z: properties.z
-                };
-            } else if (properties instanceof pc.Color) {
-                this._properties = {
-                    r: properties.r,
-                    g: properties.g,
-                    b: properties.b,
-                };
-                if (properties.a !== undefined) {
-                    this._properties.a = properties.a;
-                }
-            } else {
-                this._properties = properties;
-            }
+            this._properties = _parseProperties(properties);
 
             this.duration = duration;
 
@@ -228,8 +209,10 @@ pc.extend(pc, function () {
 
             if (this._from) {
                 for (prop in this._properties) {
-                    this._sv[prop] = this._properties[prop];
-                    this._ev[prop] = this.target[prop];
+                    if (this._properties.hasOwnProperty(prop)) {
+                        this._sv[prop] = this._properties[prop];
+                        this._ev[prop] = this.target[prop];
+                    }
                 }
 
                 if (this._slerp) {
@@ -242,8 +225,10 @@ pc.extend(pc, function () {
                 }
             } else {
                 for (prop in this._properties) {
-                    this._sv[prop] = this.target[prop];
-                    this._ev[prop] = this._properties[prop];
+                    if (this._properties.hasOwnProperty(prop)) {
+                        this._sv[prop] = this.target[prop];
+                        this._ev[prop] = this._properties[prop];
+                    }
                 }
 
                 if (this._slerp) {
@@ -380,10 +365,11 @@ pc.extend(pc, function () {
             // increment property
             var s,e,d;
             for (var prop in this._properties) {
-                s = this._sv[prop];
-                e = this._ev[prop];
-
-                this.target[prop] = s + (e - s) * a;
+                if (this._properties.hasOwnProperty(prop)) {
+                    s = this._sv[prop];
+                    e = this._ev[prop];
+                    this.target[prop] = s + (e - s) * a;
+                }
             }
 
             if (this._slerp) {
@@ -696,7 +682,7 @@ pc.extend(pc, function () {
 
         if (options && options.element) {
             // specifiy a element property to be updated
-            tween.element = element;
+            tween.element = options.element;
         }
         return tween;
     };
