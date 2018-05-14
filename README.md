@@ -2,6 +2,13 @@
 
 This is a tween library for PlayCanvas. You can include `tween.js` in your Project to start using the library.
 
+If you create your application *after* loading this library, you can call the following method to enable
+tweening on your application:
+
+```javascript
+app.addTweenManager();
+```
+
 # Usage
 
 Tweening `pc.Entity` properties looks like this:
