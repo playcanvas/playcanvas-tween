@@ -378,7 +378,7 @@ pc.extend(pc, function () {
 
             // if this is a entity property then we should dirty the transform
             if (this.entity) {
-                this.entity._dirtify(true);
+                this.entity._dirtifyLocal();
 
                 // apply element property changes
                 if (this.element && this.entity.element) {
