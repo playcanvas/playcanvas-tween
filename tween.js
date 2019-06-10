@@ -396,6 +396,8 @@ pc.extend(pc, function () {
                 var repeat = this._repeat(_extra);
                 if (!repeat) {
                     this.fire("complete", _extra);
+                    if (this.entity)
+                        this.entity.off('destroy', this.stop, this);
                     if (this._chained) this._chained.start();
                 } else {
                     this.fire("loop");
@@ -676,9 +678,7 @@ pc.extend(pc, function () {
         var tween = this._app.tween(target);
         tween.entity = this;
 
-        this.on('destroy', function () {
-            tween.stop();
-        });
+        this.once('destroy', tween.stop, tween);
 
         if (options && options.element) {
             // specifiy a element property to be updated
