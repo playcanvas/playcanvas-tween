@@ -81,7 +81,7 @@ pc.extend(pc, function () {
         this._toQuat = new pc.Quat();
         this._quat = new pc.Quat();
 
-        this.easing = pc.EASE_LINEAR;
+        this.easing = pc.Linear;
 
         this._sv = {}; // start values
         this._ev = {}; // end values
@@ -439,7 +439,7 @@ pc.extend(pc, function () {
                 if (this._yoyo) {
                     // swap start/end properties
                     for (var prop in this._properties) {
-                        tmp = this._sv[prop];
+                        var tmp = this._sv[prop];
                         this._sv[prop] = this._ev[prop];
                         this._ev[prop] = tmp;
                     }
