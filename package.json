@@ -1,0 +1,21 @@
+{
+  "name": "playcanvas-tween",
+  "version": "1.0.0",
+  "description": "Tween library for PlayCanvas engine",
+  "main": "tween.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/playcanvas/playcanvas-tween.git"
+  },
+  "author": "PlayCanvas Ltd",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/playcanvas/playcanvas-tween/issues"
+  },
+}

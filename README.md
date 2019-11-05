@@ -2,6 +2,13 @@
 
 This is a tween library for PlayCanvas. You can include `tween.js` in your Project to start using the library.
 
+If you create your application *after* loading this library, you can call the following method to enable
+tweening on your application:
+
+```javascript
+app.addTweenManager();
+```
+
 # Usage
 
 Tweening `pc.Entity` properties looks like this:
@@ -18,10 +25,10 @@ var tween = entity.tween(entity.getLocalPosition()).to({x: 10, y: 0, z: 0}, 1.0,
 tween.start();
 ```
 
-If you are dealing with rotations you should use `rotate` instead of `to`. For example:
+If you are dealing with rotations you should use `rotate` instead of `to`. This takes euler angles and uses an internal quaternion to slerp between angles. For example:
 
 ```javascript
-entity.tween(entity.getLocalRotation()).rotate({x: 0, y: 180, z: 0}}, 1.0, pc.Linear);
+entity.tween(entity.getLocalEulerAngles()).rotate({x: 0, y: 180, z: 0}}, 1.0, pc.Linear);
 ```
 
 You can also tween properties of any other object not just entities. For example:
@@ -71,7 +78,7 @@ To pause a tween call `tween.pause()`.
 
 To resume a paused tween call `tween.resume()`.
 
-## `delay(true / false)`
+## `delay(duration)`
 
 To delay a tween call `tween.delay(duration)` where duration is in seconds.
 
