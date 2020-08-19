@@ -28,7 +28,7 @@ tween.start();
 If you are dealing with rotations you should use `rotate` instead of `to`. This takes euler angles and uses an internal quaternion to slerp between angles. For example:
 
 ```javascript
-entity.tween(entity.getLocalEulerAngles()).rotate({x: 0, y: 180, z: 0}}, 1.0, pc.Linear);
+entity.tween(entity.getLocalEulerAngles()).rotate({x: 0, y: 180, z: 0}, 1.0, pc.Linear);
 ```
 
 You can also tween properties of any other object not just entities. For example:
