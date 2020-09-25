@@ -357,7 +357,7 @@ pc.extend(pc, function () {
                 }
             }
 
-            var elapsed = this.time / this.duration;
+            var elapsed = (this.duration === 0) ? 1 : (this.time / this.duration);
 
             // run easing
             var a = this.easing(elapsed);
