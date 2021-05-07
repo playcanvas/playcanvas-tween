@@ -3,7 +3,7 @@ pc.extend(pc, function () {
     /**
      * @name pc.TweenManager
      * @description Handles updating tweens
-     * @param {pc.Application} app  The application
+     * @param {pc.Application} app  - The application
      */
     var TweenManager = function (app) {
         this._app = app;
@@ -39,9 +39,9 @@ pc.extend(pc, function () {
 
     /**
      * @name  pc.Tween
-     * @param {Object} target The target property that will be tweened
-     * @param {pc.TweenManager} manager The tween manager
-     * @param {pc.Entity} entity The pc.Entity whose property we are tweening
+     * @param {object} target - The target property that will be tweened
+     * @param {pc.TweenManager} manager - The tween manager
+     * @param {pc.Entity} entity - The pc.Entity whose property we are tweening
      */
     var Tween = function (target, manager, entity) {
         pc.events.attach(this);
@@ -118,7 +118,7 @@ pc.extend(pc, function () {
             _properties = {
                 r: properties.r,
                 g: properties.g,
-                b: properties.b,
+                b: properties.b
             };
             if (properties.a !== undefined) {
                 _properties.a = properties.a;
@@ -127,7 +127,7 @@ pc.extend(pc, function () {
             _properties = properties;
         }
         return _properties;
-    }
+    };
     Tween.prototype = {
         // properties - js obj of values to update in target
         to: function (properties, duration, easing, delay, repeat, yoyo) {
@@ -307,9 +307,9 @@ pc.extend(pc, function () {
         chain: function () {
             var n = arguments.length;
 
-            while(n--) {
+            while (n--) {
                 if (n > 0) {
-                    arguments[n-1]._chained = arguments[n];
+                    arguments[n - 1]._chained = arguments[n];
                 } else {
                     this._chained = arguments[n];
                 }
@@ -324,9 +324,9 @@ pc.extend(pc, function () {
             if (!this.playing) return true;
 
             if (!this._reverse || this.pending) {
-                this.time += dt*this.timeScale;
+                this.time += dt * this.timeScale;
             } else {
-                this.time -= dt*this.timeScale;
+                this.time -= dt * this.timeScale;
             }
 
             // delay start if required
@@ -335,7 +335,7 @@ pc.extend(pc, function () {
                     if (this._reverse) {
                         this.time = this.duration - (this.time - this._currentDelay);
                     } else {
-                        this.time = this.time - this._currentDelay;
+                        this.time -= this._currentDelay;
                     }
                     this.pending = false;
                 } else {
@@ -344,7 +344,7 @@ pc.extend(pc, function () {
             }
 
             var _extra = 0;
-            if ((!this._reverse && this.time > this.duration) || (this._reverse && this.time < 0)){
+            if ((!this._reverse && this.time > this.duration) || (this._reverse && this.time < 0)) {
                 this._count++;
                 this.complete = true;
                 this.playing = false;
@@ -363,7 +363,7 @@ pc.extend(pc, function () {
             var a = this.easing(elapsed);
 
             // increment property
-            var s,e,d;
+            var s, e;
             for (var prop in this._properties) {
                 if (this._properties.hasOwnProperty(prop)) {
                     s = this._sv[prop];
@@ -442,7 +442,7 @@ pc.extend(pc, function () {
                 return true;
             }
             return false;
-        },
+        }
 
     };
 
@@ -479,145 +479,148 @@ pc.extend(pc, function () {
     };
 
     var CubicInOut = function (k) {
-        if ( ( k *= 2 ) < 1 ) return 0.5 * k * k * k;
-        return 0.5 * ( ( k -= 2 ) * k * k + 2 );
+        if ((k *= 2) < 1) return 0.5 * k * k * k;
+        return 0.5 * ((k -= 2) * k * k + 2);
     };
 
     var QuarticIn = function (k) {
-            return k * k * k * k;
+        return k * k * k * k;
     };
 
     var QuarticOut = function (k) {
-        return 1 - ( --k * k * k * k );
+        return 1 - (--k * k * k * k);
     };
 
     var QuarticInOut = function (k) {
-        if ( ( k *= 2 ) < 1) return 0.5 * k * k * k * k;
-        return - 0.5 * ( ( k -= 2 ) * k * k * k - 2 );
+        if ((k *= 2) < 1) return 0.5 * k * k * k * k;
+        return - 0.5 * ((k -= 2) * k * k * k - 2);
     };
 
     var QuinticIn = function (k) {
-            return k * k * k * k * k;
+        return k * k * k * k * k;
     };
 
     var QuinticOut = function (k) {
-            return --k * k * k * k * k + 1;
+        return --k * k * k * k * k + 1;
     };
 
     var QuinticInOut = function (k) {
-        if ( ( k *= 2 ) < 1 ) return 0.5 * k * k * k * k * k;
-        return 0.5 * ( ( k -= 2 ) * k * k * k * k + 2 );
+        if ((k *= 2) < 1) return 0.5 * k * k * k * k * k;
+        return 0.5 * ((k -= 2) * k * k * k * k + 2);
     };
 
     var SineIn = function (k) {
         if (k === 0) return 0;
         if (k === 1) return 1;
-        return 1 - Math.cos( k * Math.PI / 2 );
+        return 1 - Math.cos(k * Math.PI / 2);
     };
 
     var SineOut = function (k) {
         if (k === 0) return 0;
         if (k === 1) return 1;
-        return Math.sin( k * Math.PI / 2 );
+        return Math.sin(k * Math.PI / 2);
     };
 
     var SineInOut = function (k) {
         if (k === 0) return 0;
         if (k === 1) return 1;
-        return 0.5 * ( 1 - Math.cos( Math.PI * k ) );
+        return 0.5 * (1 - Math.cos(Math.PI * k));
     };
 
     var ExponentialIn = function (k) {
-        return k === 0 ? 0 : Math.pow( 1024, k - 1 );
+        return k === 0 ? 0 : Math.pow(1024, k - 1);
     };
 
     var ExponentialOut = function (k) {
-        return k === 1 ? 1 : 1 - Math.pow( 2, - 10 * k );
+        return k === 1 ? 1 : 1 - Math.pow(2, - 10 * k);
     };
 
     var ExponentialInOut = function (k) {
-        if ( k === 0 ) return 0;
-        if ( k === 1 ) return 1;
-        if ( ( k *= 2 ) < 1 ) return 0.5 * Math.pow( 1024, k - 1 );
-        return 0.5 * ( - Math.pow( 2, - 10 * ( k - 1 ) ) + 2 );
+        if (k === 0) return 0;
+        if (k === 1) return 1;
+        if ((k *= 2) < 1) return 0.5 * Math.pow(1024, k - 1);
+        return 0.5 * (- Math.pow(2, - 10 * (k - 1)) + 2);
     };
 
     var CircularIn = function (k) {
-        return 1 - Math.sqrt( 1 - k * k );
+        return 1 - Math.sqrt(1 - k * k);
     };
 
     var CircularOut = function (k) {
-        return Math.sqrt( 1 - ( --k * k ) );
+        return Math.sqrt(1 - (--k * k));
     };
 
     var CircularInOut = function (k) {
-        if ( ( k *= 2 ) < 1) return - 0.5 * ( Math.sqrt( 1 - k * k) - 1);
-        return 0.5 * ( Math.sqrt( 1 - ( k -= 2) * k) + 1);
+        if ((k *= 2) < 1) return - 0.5 * (Math.sqrt(1 - k * k) - 1);
+        return 0.5 * (Math.sqrt(1 - (k -= 2) * k) + 1);
     };
 
     var ElasticIn = function (k) {
         var s, a = 0.1, p = 0.4;
-        if ( k === 0 ) return 0;
-        if ( k === 1 ) return 1;
-        if ( !a || a < 1 ) { a = 1; s = p / 4; }
-        else s = p * Math.asin( 1 / a ) / ( 2 * Math.PI );
-        return - ( a * Math.pow( 2, 10 * ( k -= 1 ) ) * Math.sin( ( k - s ) * ( 2 * Math.PI ) / p ) );
+        if (k === 0) return 0;
+        if (k === 1) return 1;
+        if (!a || a < 1) {
+            a = 1; s = p / 4;
+        } else s = p * Math.asin(1 / a) / (2 * Math.PI);
+        return - (a * Math.pow(2, 10 * (k -= 1)) * Math.sin((k - s) * (2 * Math.PI) / p));
     };
 
     var ElasticOut = function (k) {
         var s, a = 0.1, p = 0.4;
-        if ( k === 0 ) return 0;
-        if ( k === 1 ) return 1;
-        if ( !a || a < 1 ) { a = 1; s = p / 4; }
-        else s = p * Math.asin( 1 / a ) / ( 2 * Math.PI );
-        return ( a * Math.pow( 2, - 10 * k) * Math.sin( ( k - s ) * ( 2 * Math.PI ) / p ) + 1 );
+        if (k === 0) return 0;
+        if (k === 1) return 1;
+        if (!a || a < 1) {
+            a = 1; s = p / 4;
+        } else s = p * Math.asin(1 / a) / (2 * Math.PI);
+        return (a * Math.pow(2, - 10 * k) * Math.sin((k - s) * (2 * Math.PI) / p) + 1);
     };
 
     var ElasticInOut = function (k) {
         var s, a = 0.1, p = 0.4;
-        if ( k === 0 ) return 0;
-        if ( k === 1 ) return 1;
-        if ( !a || a < 1 ) { a = 1; s = p / 4; }
-        else s = p * Math.asin( 1 / a ) / ( 2 * Math.PI );
-        if ( ( k *= 2 ) < 1 ) return - 0.5 * ( a * Math.pow( 2, 10 * ( k -= 1 ) ) * Math.sin( ( k - s ) * ( 2 * Math.PI ) / p ) );
-        return a * Math.pow( 2, -10 * ( k -= 1 ) ) * Math.sin( ( k - s ) * ( 2 * Math.PI ) / p ) * 0.5 + 1;
+        if (k === 0) return 0;
+        if (k === 1) return 1;
+        if (!a || a < 1) {
+            a = 1; s = p / 4;
+        } else s = p * Math.asin(1 / a) / (2 * Math.PI);
+        if ((k *= 2) < 1) return - 0.5 * (a * Math.pow(2, 10 * (k -= 1)) * Math.sin((k - s) * (2 * Math.PI) / p));
+        return a * Math.pow(2, -10 * (k -= 1)) * Math.sin((k - s) * (2 * Math.PI) / p) * 0.5 + 1;
     };
 
     var BackIn = function (k) {
-            var s = 1.70158;
-            return k * k * ( ( s + 1 ) * k - s );
+        var s = 1.70158;
+        return k * k * ((s + 1) * k - s);
     };
 
     var BackOut = function (k) {
         var s = 1.70158;
-        return --k * k * ( ( s + 1 ) * k + s ) + 1;
+        return --k * k * ((s + 1) * k + s) + 1;
     };
 
     var BackInOut = function (k) {
         var s = 1.70158 * 1.525;
-        if ( ( k *= 2 ) < 1 ) return 0.5 * ( k * k * ( ( s + 1 ) * k - s ) );
-        return 0.5 * ( ( k -= 2 ) * k * ( ( s + 1 ) * k + s ) + 2 );
-    };
-
-    var BounceIn = function (k) {
-        return 1 - BounceOut( 1 - k );
+        if ((k *= 2) < 1) return 0.5 * (k * k * ((s + 1) * k - s));
+        return 0.5 * ((k -= 2) * k * ((s + 1) * k + s) + 2);
     };
 
     var BounceOut = function (k) {
-        if ( k < ( 1 / 2.75 ) ) {
+        if (k < (1 / 2.75)) {
             return 7.5625 * k * k;
-        } else if ( k < ( 2 / 2.75 ) ) {
-            return 7.5625 * ( k -= ( 1.5 / 2.75 ) ) * k + 0.75;
-        } else if ( k < ( 2.5 / 2.75 ) ) {
-            return 7.5625 * ( k -= ( 2.25 / 2.75 ) ) * k + 0.9375;
-        } else {
-            return 7.5625 * ( k -= ( 2.625 / 2.75 ) ) * k + 0.984375;
+        } else if (k < (2 / 2.75)) {
+            return 7.5625 * (k -= (1.5 / 2.75)) * k + 0.75;
+        } else if (k < (2.5 / 2.75)) {
+            return 7.5625 * (k -= (2.25 / 2.75)) * k + 0.9375;
         }
+        return 7.5625 * (k -= (2.625 / 2.75)) * k + 0.984375;
+
+    };
+
+    var BounceIn = function (k) {
+        return 1 - BounceOut(1 - k);
     };
 
     var BounceInOut = function (k) {
-        if ( k < 0.5 ) return BounceIn( k * 2 ) * 0.5;
-        return BounceOut( k * 2 - 1 ) * 0.5 + 0.5;
+        if (k < 0.5) return BounceIn(k * 2) * 0.5;
+        return BounceOut(k * 2 - 1) * 0.5 + 0.5;
     };
 
     return {
