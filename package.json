@@ -1,21 +1,33 @@
 {
   "name": "playcanvas-tween",
   "version": "1.0.0",
+  "author": "PlayCanvas <support@playcanvas.com>",
+  "homepage": "https://playcanvas.com",
   "description": "Tween library for PlayCanvas engine",
+  "keywords": [
+    "playcanvas",
+    "webgl",
+    "tween",
+    "animation"
+  ],
+  "license": "MIT",
   "main": "tween.js",
-  "directories": {
-    "test": "tests"
-  },
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+  "bugs": {
+    "url": "https://github.com/playcanvas/playcanvas-tween/issues"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/playcanvas/playcanvas-tween.git"
   },
-  "author": "PlayCanvas Ltd",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/playcanvas/playcanvas-tween/issues"
+  "eslintConfig": {
+    "extends": "@playcanvas/eslint-config"
+  },
+  "devDependencies": {
+    "@playcanvas/eslint-config": "1.0.8",
+    "eslint": "^7.25.0"
+  },
+  "scripts": {
+    "lint": "eslint --ext .js tween.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
   }
 }
