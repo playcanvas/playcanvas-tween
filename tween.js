@@ -363,7 +363,7 @@ pc.extend(pc, function () {
             var a = this.easing(elapsed);
 
             // increment property
-            var s, e, d;
+            var s, e;
             for (var prop in this._properties) {
                 if (this._properties.hasOwnProperty(prop)) {
                     s = this._sv[prop];
@@ -602,10 +602,6 @@ pc.extend(pc, function () {
         return 0.5 * ((k -= 2) * k * ((s + 1) * k + s) + 2);
     };
 
-    var BounceIn = function (k) {
-        return 1 - BounceOut(1 - k);
-    };
-
     var BounceOut = function (k) {
         if (k < (1 / 2.75)) {
             return 7.5625 * k * k;
@@ -616,6 +612,10 @@ pc.extend(pc, function () {
         }
         return 7.5625 * (k -= (2.625 / 2.75)) * k + 0.984375;
 
+    };
+
+    var BounceIn = function (k) {
+        return 1 - BounceOut(1 - k);
     };
 
     var BounceInOut = function (k) {
