@@ -148,7 +148,45 @@ pc.extend(pc, function () {
 
             return this;
         },
+        
+        by: function (properties, duration, easing, delay, repeat, yoyo) {
+            this._properties = _parseProperties(properties);
+            this.duration = duration;
+            
+            if ('x' in this._properties) 
+                this._properties.x = this.target.x + this._properties.x;
+            if ('y' in this._properties) 
+                this._properties.y = this.target.y + this._properties.y;
+            if ('z' in this._properties) 
+                this._properties.z = this.target.z + this._properties.z;
+            if ('w' in this._properties) 
+                this._properties.w = this.target.w + this._properties.w;
+            
+            if ('r' in this._properties) 
+                this._properties.r = this.target.r + this._properties.r;
+            if ('g' in this._properties) 
+                this._properties.g = this.target.g + this._properties.g;
+            if ('b' in this._properties) 
+                this._properties.b = this.target.b + this._properties.b;
+            if ('a' in this._properties) 
+                this._properties.a = this.target.a + this._properties.a;
+            
+            
+            if (easing) this.easing = easing;
+            if (delay) {
+                this.delay(delay);
+            }
+            if (repeat) {
+                this.repeat(repeat);
+            }
 
+            if (yoyo) {
+                this.yoyo(yoyo);
+            }
+
+            return this;
+        },
+            
         from: function (properties, duration, easing, delay, repeat, yoyo) {
             this._properties = _parseProperties(properties);
             this.duration = duration;
