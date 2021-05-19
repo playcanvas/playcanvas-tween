@@ -232,12 +232,17 @@ pc.extend(pc, function () {
                 }
 
                 if (this._slerp) {
-                    this._fromQuat.setFromEulerAngles(this.target.x, this.target.y, this.target.z);
-
                     _x = this._properties.x !== undefined ? this._properties.x : this.target.x;
                     _y = this._properties.y !== undefined ? this._properties.y : this.target.y;
                     _z = this._properties.z !== undefined ? this._properties.z : this.target.z;
-                    this._toQuat.setFromEulerAngles(_x, _y, _z);
+                    
+                    if (this._properties.w !== undefined) {
+                        this._fromQuat.copy(this.target);
+                        this._toQuat.set(_x, _y, _z, this._properties.w);
+                    } else {
+                        this._fromQuat.setFromEulerAngles(this.target.x, this.target.y, this.target.z);
+                        this._toQuat.setFromEulerAngles(_x, _y, _z);
+                    }
                 }
             }
 
