@@ -20,11 +20,14 @@
     "url": "git+https://github.com/playcanvas/playcanvas-tween.git"
   },
   "eslintConfig": {
-    "extends": "@playcanvas/eslint-config"
-  },
+    "extends": "@playcanvas/eslint-config",
+    "globals": {
+      "pc": "readonly"
+    }
+ },
   "devDependencies": {
-    "@playcanvas/eslint-config": "1.0.8",
-    "eslint": "^7.25.0"
+    "@playcanvas/eslint-config": "^1.0.16",
+    "eslint": "^8.7.0"
   },
   "scripts": {
     "lint": "eslint --ext .js tween.js",

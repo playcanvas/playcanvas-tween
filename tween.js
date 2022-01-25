@@ -3,7 +3,7 @@ pc.extend(pc, function () {
     /**
      * @name pc.TweenManager
      * @description Handles updating tweens
-     * @param {pc.Application} app  - The application
+     * @param {pc.Application} app - The application
      */
     var TweenManager = function (app) {
         this._app = app;
@@ -493,7 +493,7 @@ pc.extend(pc, function () {
 
     var QuarticInOut = function (k) {
         if ((k *= 2) < 1) return 0.5 * k * k * k * k;
-        return - 0.5 * ((k -= 2) * k * k * k - 2);
+        return -0.5 * ((k -= 2) * k * k * k - 2);
     };
 
     var QuinticIn = function (k) {
@@ -532,14 +532,14 @@ pc.extend(pc, function () {
     };
 
     var ExponentialOut = function (k) {
-        return k === 1 ? 1 : 1 - Math.pow(2, - 10 * k);
+        return k === 1 ? 1 : 1 - Math.pow(2, -10 * k);
     };
 
     var ExponentialInOut = function (k) {
         if (k === 0) return 0;
         if (k === 1) return 1;
         if ((k *= 2) < 1) return 0.5 * Math.pow(1024, k - 1);
-        return 0.5 * (- Math.pow(2, - 10 * (k - 1)) + 2);
+        return 0.5 * (-Math.pow(2, -10 * (k - 1)) + 2);
     };
 
     var CircularIn = function (k) {
@@ -551,7 +551,7 @@ pc.extend(pc, function () {
     };
 
     var CircularInOut = function (k) {
-        if ((k *= 2) < 1) return - 0.5 * (Math.sqrt(1 - k * k) - 1);
+        if ((k *= 2) < 1) return -0.5 * (Math.sqrt(1 - k * k) - 1);
         return 0.5 * (Math.sqrt(1 - (k -= 2) * k) + 1);
     };
 
@@ -562,7 +562,7 @@ pc.extend(pc, function () {
         if (!a || a < 1) {
             a = 1; s = p / 4;
         } else s = p * Math.asin(1 / a) / (2 * Math.PI);
-        return - (a * Math.pow(2, 10 * (k -= 1)) * Math.sin((k - s) * (2 * Math.PI) / p));
+        return -(a * Math.pow(2, 10 * (k -= 1)) * Math.sin((k - s) * (2 * Math.PI) / p));
     };
 
     var ElasticOut = function (k) {
@@ -572,7 +572,7 @@ pc.extend(pc, function () {
         if (!a || a < 1) {
             a = 1; s = p / 4;
         } else s = p * Math.asin(1 / a) / (2 * Math.PI);
-        return (a * Math.pow(2, - 10 * k) * Math.sin((k - s) * (2 * Math.PI) / p) + 1);
+        return (a * Math.pow(2, -10 * k) * Math.sin((k - s) * (2 * Math.PI) / p) + 1);
     };
 
     var ElasticInOut = function (k) {
@@ -582,7 +582,7 @@ pc.extend(pc, function () {
         if (!a || a < 1) {
             a = 1; s = p / 4;
         } else s = p * Math.asin(1 / a) / (2 * Math.PI);
-        if ((k *= 2) < 1) return - 0.5 * (a * Math.pow(2, 10 * (k -= 1)) * Math.sin((k - s) * (2 * Math.PI) / p));
+        if ((k *= 2) < 1) return -0.5 * (a * Math.pow(2, 10 * (k -= 1)) * Math.sin((k - s) * (2 * Math.PI) / p));
         return a * Math.pow(2, -10 * (k -= 1)) * Math.sin((k - s) * (2 * Math.PI) / p) * 0.5 + 1;
     };
 
