@@ -31,7 +31,10 @@ pc.extend(pc, function () {
 
             // add any tweens that were added mid-update
             if (this._add.length) {
-                this._tweens = this._tweens.concat(this._add);
+                for (let i = 0; i < this._add.length; i++) {
+                    if (this._tweens.indexOf(this._add[i]) > -1) continue;
+                    this._tweens.push(this._add[i]);
+                }
                 this._add.length = 0;
             }
         }
