@@ -330,7 +330,7 @@ pc.extend(pc, function () {
             if (this.stopped) return false;
 
             if (!this.playing) return true;
-
+            
             if (!this._reverse || this.pending) {
                 this.time += dt * this.timeScale;
             } else {
@@ -346,9 +346,14 @@ pc.extend(pc, function () {
                         this.time -= this._currentDelay;
                     }
                     this.pending = false;
+                    this.fire("start");
                 } else {
                     return true;
                 }
+            }
+            
+            if (this.time === 0 && !this._currentDelay) {
+                this.fire("start");
             }
 
             var _extra = 0;
