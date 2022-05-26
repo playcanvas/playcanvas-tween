@@ -238,7 +238,7 @@ pc.extend(pc, function () {
                     _x = this._properties.x !== undefined ? this._properties.x : this.target.x;
                     _y = this._properties.y !== undefined ? this._properties.y : this.target.y;
                     _z = this._properties.z !== undefined ? this._properties.z : this.target.z;
-                    
+
                     if (this._properties.w !== undefined) {
                         this._fromQuat.copy(this.target);
                         this._toQuat.set(_x, _y, _z, this._properties.w);
