@@ -107,6 +107,21 @@ To reverse a tween call `tween.reverse()`.
 
 # Events
 
+## `begin()`
+
+This is fired whenever a tween begins. For repeating tweens, this is fired each time the tween repeats as well.
+
+E.g.
+
+```javascript
+entity
+.tween(entity.getLocalPosition())
+.to({x: 10, y: 0, z: 0}, 1, pc.Linear)
+.on('begin', function () {
+   console.log('tween began');
+});
+```
+
 ## `update(dt)`
 
 This is fired on every update cycle. You can use this method to manually update something in your code using the tweened value.
