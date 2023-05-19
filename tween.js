@@ -3,7 +3,7 @@ pc.extend(pc, function () {
     /**
      * @name pc.TweenManager
      * @description Handles updating tweens
-     * @param {pc.Application} app - The application
+     * @param {pc.AppBase} app - The AppBase instance.
      */
     var TweenManager = function (app) {
         this._app = app;
@@ -668,10 +668,10 @@ pc.extend(pc, function () {
     };
 }());
 
-// Expose prototype methods and create a default tween manager on the application
+// Expose prototype methods and create a default tween manager on the AppBase
 (function () {
-    // Add pc.Application#addTweenManager method
-    pc.Application.prototype.addTweenManager = function () {
+    // Add pc.AppBase#addTweenManager method
+    pc.AppBase.prototype.addTweenManager = function () {
         this._tweenManager = new pc.TweenManager(this);
 
         this.on("update", function (dt) {
@@ -679,8 +679,8 @@ pc.extend(pc, function () {
         });
     };
 
-    // Add pc.Application#tween method
-    pc.Application.prototype.tween = function (target) {
+    // Add pc.AppBase#tween method
+    pc.AppBase.prototype.tween = function (target) {
         return new pc.Tween(target, this._tweenManager);
     };
 
@@ -698,9 +698,9 @@ pc.extend(pc, function () {
         return tween;
     };
 
-    // Create a default tween manager on the application
-    var application = pc.Application.getApplication();
-    if (application) {
-        application.addTweenManager();
+    // Create a default tween manager on the AppBase
+    var AppBase = pc.AppBase.getApplication();
+    if (AppBase) {
+        AppBase.addTweenManager();
     }
 })();
