@@ -22,7 +22,8 @@
   "eslintConfig": {
     "extends": "@playcanvas/eslint-config",
     "globals": {
-      "pc": "readonly"
+      "pc": "readonly",
+      "QUnit": "readonly"
     }
   },
   "devDependencies": {
