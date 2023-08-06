@@ -22,12 +22,13 @@
   "eslintConfig": {
     "extends": "@playcanvas/eslint-config",
     "globals": {
-      "pc": "readonly"
+      "pc": "readonly",
+      "QUnit": "readonly"
     }
   },
   "devDependencies": {
-    "@playcanvas/eslint-config": "^1.1.1",
-    "eslint": "^8.16.0"
+    "@playcanvas/eslint-config": "^1.5.0",
+    "eslint": "^8.46.0"
   },
   "scripts": {
     "lint": "eslint --ext .js tween.js",
