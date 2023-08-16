@@ -326,6 +326,21 @@ pc.extend(pc, function () {
             return this;
         },
 
+        onUpdate: function (callback) {
+            this.on('update', callback);
+            return this;
+        },
+
+        onComplete: function (callback) {
+            this.on('complete', callback);
+            return this;
+        },
+
+        onLoop: function (callback) {
+            this.on('loop', callback);
+            return this;
+        },
+
         update: function (dt) {
             if (this.stopped) return false;
 

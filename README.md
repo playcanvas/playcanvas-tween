@@ -107,9 +107,12 @@ To reverse a tween call `tween.reverse()`.
 
 # Events
 
-## `update(dt)`
+To subscribe to events during Tween execution, use a these methods:
 
-This is fired on every update cycle. You can use this method to manually update something in your code using the tweened value.
+## `onUpdate`
+
+This is called on every update cycle. You can use this method to manually update something in your code using the tweened value.
+It provides `dt` argument.
 
 E.g.
 
@@ -117,15 +120,15 @@ E.g.
 var color = new pc.Color(1, 0, 0);
 
 var tween = app.tween(color).to(new pc.Color(0, 1, 1), 1, pc.Linear);
-tween.on('update', function (dt) {
+tween.onUpdate((dt) => {
     material.diffuse = color;
     material.update();
 });
 ```
 
-## `complete()`
+## `onComplete`
 
-This is fired when the tween is finished. If the tween is looping the `loop` event is fired instead.
+This is called when the tween is finished. If the tween is looping the `onLoop` will be called instead.
 
 E.g.
 
@@ -133,14 +136,14 @@ E.g.
 entity
 .tween(entity.getLocalPosition())
 .to({x: 10, y: 0, z: 0}, 1, pc.Linear)
-.on('complete', function () {
+.onComplete(() => {
    console.log('tween completed');
 });
 ```
 
-## `loop()`
+## `onLoop`
 
-This is fired whenever a looping tween finishes a cycle. This is fired instead of the `complete` event for looping tweens.
+This is called whenever a looping tween finishes a cycle. This is called instead of the `onComplete` for looping tweens.
 
 E.g.
 
@@ -149,7 +152,7 @@ entity
 .tween(entity.getLocalPosition())
 .to({x: 10, y: 0, z: 0}, 1, pc.Linear)
 .loop(true)
-.on('loop', function () {
+.onLoop(() => {
    console.log('tween loop');
 });
 ```
