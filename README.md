@@ -120,7 +120,7 @@ E.g.
 var color = new pc.Color(1, 0, 0);
 
 var tween = app.tween(color).to(new pc.Color(0, 1, 1), 1, pc.Linear);
-tween.onUpdate(function (dt) {
+tween.onUpdate((dt) => {
     material.diffuse = color;
     material.update();
 });
@@ -136,7 +136,7 @@ E.g.
 entity
 .tween(entity.getLocalPosition())
 .to({x: 10, y: 0, z: 0}, 1, pc.Linear)
-.onComplete(function () {
+.onComplete(() => {
    console.log('tween completed');
 });
 ```
@@ -152,7 +152,7 @@ entity
 .tween(entity.getLocalPosition())
 .to({x: 10, y: 0, z: 0}, 1, pc.Linear)
 .loop(true)
-.onLoop(function () {
+.onLoop(() => {
    console.log('tween loop');
 });
 ```
