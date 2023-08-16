@@ -107,9 +107,12 @@ To reverse a tween call `tween.reverse()`.
 
 # Events
 
-## `update(dt)`
+To subscribe to events during Tween execution, use a these methods:
 
-This is fired on every update cycle. You can use this method to manually update something in your code using the tweened value.
+## `onUpdate`
+
+This is called on every update cycle. You can use this method to manually update something in your code using the tweened value.
+It provides `dt` argument.
 
 E.g.
 
@@ -123,9 +126,9 @@ tween.onUpdate(function (dt) {
 });
 ```
 
-## `complete()`
+## `onComplete`
 
-This is fired when the tween is finished. If the tween is looping the `loop` event is fired instead.
+This is called when the tween is finished. If the tween is looping the `onLoop` will be called instead.
 
 E.g.
 
@@ -138,9 +141,9 @@ entity
 });
 ```
 
-## `loop()`
+## `onLoop`
 
-This is fired whenever a looping tween finishes a cycle. This is fired instead of the `complete` event for looping tweens.
+This is called whenever a looping tween finishes a cycle. This is called instead of the `onComplete` for looping tweens.
 
 E.g.
 
