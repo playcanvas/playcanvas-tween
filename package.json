@@ -1,6 +1,6 @@
 {
   "name": "playcanvas-tween",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "author": "PlayCanvas <support@playcanvas.com>",
   "homepage": "https://playcanvas.com",
   "description": "Tween library for PlayCanvas engine",
@@ -32,6 +32,6 @@
   },
   "scripts": {
     "lint": "eslint --ext .js tween.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "start test/index.html"
   }
 }
