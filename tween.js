@@ -346,8 +346,22 @@ pc.extend(pc, function () {
                         this.time -= this._currentDelay;
                     }
                     this.pending = false;
+
+                    if (this._numRepeats > 0) {
+                        this.fire("loop:begin");
+                    } else if (this._count === 0) {
+                        this.fire("begin");
+                    }
                 } else {
                     return true;
+                }
+            }
+            
+            if (this.time === 0 && !this._currentDelay) {
+                if (this._numRepeats > 0) {
+                    this.fire("loop:begin");
+                } else if (this._count === 0) {
+                    this.fire("begin");
                 }
             }
 

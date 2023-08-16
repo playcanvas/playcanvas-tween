@@ -107,6 +107,21 @@ To reverse a tween call `tween.reverse()`.
 
 # Events
 
+## `begin()`
+
+This is fired whenever a non-looped tween begins.
+
+E.g.
+
+```javascript
+entity
+.tween(entity.getLocalPosition())
+.to({x: 10, y: 0, z: 0}, 1, pc.Linear)
+.on('begin', function () {
+   console.log('tween began');
+});
+```
+
 ## `update(dt)`
 
 This is fired on every update cycle. You can use this method to manually update something in your code using the tweened value.
@@ -151,6 +166,22 @@ entity
 .loop(true)
 .on('loop', function () {
    console.log('tween loop');
+});
+```
+
+## `loop:begin()`
+
+This is fired whenever a looped tween begins, at the beginning of each loop cycle.
+
+E.g.
+
+```javascript
+entity
+.tween(entity.getLocalPosition())
+.to({x: 10, y: 0, z: 0}, 1, pc.Linear)
+.loop(true)
+.on('loop:begin', function () {
+   console.log('looped tween began');
 });
 ```
 
