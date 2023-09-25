@@ -136,11 +136,11 @@ declare namespace pc {
         
         update: (dt: number) => boolean;
         
-        on: (
-            name: string,
-            callback: callbacks.HandleEvent,
-            scope?: unknown
-        ) => this;
+        onUpdate: (callback: () => void) => Tween;
+
+        onComplete: (callback: () => void) => Tween;
+
+        onLoop: (callback: () => void) => Tween;
     }
     
     export interface TweenOptions {
