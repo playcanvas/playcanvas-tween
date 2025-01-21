@@ -19,19 +19,13 @@
     "type": "git",
     "url": "git+https://github.com/playcanvas/playcanvas-tween.git"
   },
-  "eslintConfig": {
-    "extends": "@playcanvas/eslint-config",
-    "globals": {
-      "pc": "readonly",
-      "QUnit": "readonly"
-    }
-  },
   "devDependencies": {
-    "@playcanvas/eslint-config": "^1.7.1",
-    "eslint": "^8.50.0"
+    "@playcanvas/eslint-config": "^2.0.8",
+    "eslint": "^9.18.0",
+    "globals": "^15.14.0"
   },
   "scripts": {
-    "lint": "eslint --ext .js tween.js",
+    "lint": "eslint tween.js",
     "test": "start test/index.html"
   }
 }
