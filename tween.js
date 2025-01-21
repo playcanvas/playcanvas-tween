@@ -5,7 +5,7 @@ pc.extend(pc, function () {
      * @description Handles updating tweens
      * @param {pc.AppBase} app - The AppBase instance.
      */
-    var TweenManager = function (app) {
+    const TweenManager = function (app) {
         this._app = app;
         this._tweens = [];
         this._add = []; // to be added
@@ -18,8 +18,8 @@ pc.extend(pc, function () {
         },
 
         update: function (dt) {
-            var i = 0;
-            var n = this._tweens.length;
+            let i = 0;
+            let n = this._tweens.length;
             while (i < n) {
                 if (this._tweens[i].update(dt)) {
                     i++;
@@ -46,7 +46,7 @@ pc.extend(pc, function () {
      * @param {pc.TweenManager} manager - The tween manager
      * @param {pc.Entity} entity - The pc.Entity whose property we are tweening
      */
-    var Tween = function (target, manager, entity) {
+    const Tween = function (target, manager, entity) {
         pc.events.attach(this);
 
         this.manager = manager;
@@ -90,8 +90,8 @@ pc.extend(pc, function () {
         this._ev = {}; // end values
     };
 
-    var _parseProperties = function (properties) {
-        var _properties;
+    const _parseProperties = function (properties) {
+        let _properties;
         if (properties instanceof pc.Vec2) {
             _properties = {
                 x: properties.x,
@@ -196,7 +196,7 @@ pc.extend(pc, function () {
         },
 
         start: function () {
-            var prop, _x, _y, _z;
+            let prop, _x, _y, _z;
 
             this.playing = true;
             this.complete = false;
@@ -313,7 +313,7 @@ pc.extend(pc, function () {
         },
 
         chain: function () {
-            var n = arguments.length;
+            let n = arguments.length;
 
             while (n--) {
                 if (n > 0) {
@@ -366,7 +366,7 @@ pc.extend(pc, function () {
                 }
             }
 
-            var _extra = 0;
+            let _extra = 0;
             if ((!this._reverse && this.time > this.duration) || (this._reverse && this.time < 0)) {
                 this._count++;
                 this.complete = true;
@@ -380,14 +380,14 @@ pc.extend(pc, function () {
                 }
             }
 
-            var elapsed = (this.duration === 0) ? 1 : (this.time / this.duration);
+            const elapsed = (this.duration === 0) ? 1 : (this.time / this.duration);
 
             // run easing
-            var a = this.easing(elapsed);
+            const a = this.easing(elapsed);
 
             // increment property
-            var s, e;
-            for (var prop in this._properties) {
+            let s, e;
+            for (const prop in this._properties) {
                 if (this._properties.hasOwnProperty(prop)) {
                     s = this._sv[prop];
                     e = this._ev[prop];
@@ -413,17 +413,18 @@ pc.extend(pc, function () {
                 }
             }
 
-            this.fire("update", dt);
+            this.fire('update', dt);
 
             if (this.complete) {
-                var repeat = this._repeat(_extra);
+                const repeat = this._repeat(_extra);
                 if (!repeat) {
-                    this.fire("complete", _extra);
-                    if (this.entity)
+                    this.fire('complete', _extra);
+                    if (this.entity) {
                         this.entity.off('destroy', this.stop, this);
+                    }
                     if (this._chained) this._chained.start();
                 } else {
-                    this.fire("loop");
+                    this.fire('loop');
                 }
 
                 return repeat;
@@ -449,8 +450,8 @@ pc.extend(pc, function () {
 
                 if (this._yoyo) {
                     // swap start/end properties
-                    for (var prop in this._properties) {
-                        var tmp = this._sv[prop];
+                    for (const prop in this._properties) {
+                        const tmp = this._sv[prop];
                         this._sv[prop] = this._ev[prop];
                         this._ev[prop] = tmp;
                     }
@@ -474,112 +475,113 @@ pc.extend(pc, function () {
      * Easing methods
      */
 
-    var Linear = function (k) {
+    const Linear = function (k) {
         return k;
     };
 
-    var QuadraticIn = function (k) {
+    const QuadraticIn = function (k) {
         return k * k;
     };
 
-    var QuadraticOut = function (k) {
+    const QuadraticOut = function (k) {
         return k * (2 - k);
     };
 
-    var QuadraticInOut = function (k) {
+    const QuadraticInOut = function (k) {
         if ((k *= 2) < 1) {
             return 0.5 * k * k;
         }
         return -0.5 * (--k * (k - 2) - 1);
     };
 
-    var CubicIn = function (k) {
+    const CubicIn = function (k) {
         return k * k * k;
     };
 
-    var CubicOut = function (k) {
+    const CubicOut = function (k) {
         return --k * k * k + 1;
     };
 
-    var CubicInOut = function (k) {
+    const CubicInOut = function (k) {
         if ((k *= 2) < 1) return 0.5 * k * k * k;
         return 0.5 * ((k -= 2) * k * k + 2);
     };
 
-    var QuarticIn = function (k) {
+    const QuarticIn = function (k) {
         return k * k * k * k;
     };
 
-    var QuarticOut = function (k) {
+    const QuarticOut = function (k) {
         return 1 - (--k * k * k * k);
     };
 
-    var QuarticInOut = function (k) {
+    const QuarticInOut = function (k) {
         if ((k *= 2) < 1) return 0.5 * k * k * k * k;
         return -0.5 * ((k -= 2) * k * k * k - 2);
     };
 
-    var QuinticIn = function (k) {
+    const QuinticIn = function (k) {
         return k * k * k * k * k;
     };
 
-    var QuinticOut = function (k) {
+    const QuinticOut = function (k) {
         return --k * k * k * k * k + 1;
     };
 
-    var QuinticInOut = function (k) {
+    const QuinticInOut = function (k) {
         if ((k *= 2) < 1) return 0.5 * k * k * k * k * k;
         return 0.5 * ((k -= 2) * k * k * k * k + 2);
     };
 
-    var SineIn = function (k) {
+    const SineIn = function (k) {
         if (k === 0) return 0;
         if (k === 1) return 1;
         return 1 - Math.cos(k * Math.PI / 2);
     };
 
-    var SineOut = function (k) {
+    const SineOut = function (k) {
         if (k === 0) return 0;
         if (k === 1) return 1;
         return Math.sin(k * Math.PI / 2);
     };
 
-    var SineInOut = function (k) {
+    const SineInOut = function (k) {
         if (k === 0) return 0;
         if (k === 1) return 1;
         return 0.5 * (1 - Math.cos(Math.PI * k));
     };
 
-    var ExponentialIn = function (k) {
+    const ExponentialIn = function (k) {
         return k === 0 ? 0 : Math.pow(1024, k - 1);
     };
 
-    var ExponentialOut = function (k) {
+    const ExponentialOut = function (k) {
         return k === 1 ? 1 : 1 - Math.pow(2, -10 * k);
     };
 
-    var ExponentialInOut = function (k) {
+    const ExponentialInOut = function (k) {
         if (k === 0) return 0;
         if (k === 1) return 1;
         if ((k *= 2) < 1) return 0.5 * Math.pow(1024, k - 1);
         return 0.5 * (-Math.pow(2, -10 * (k - 1)) + 2);
     };
 
-    var CircularIn = function (k) {
+    const CircularIn = function (k) {
         return 1 - Math.sqrt(1 - k * k);
     };
 
-    var CircularOut = function (k) {
+    const CircularOut = function (k) {
         return Math.sqrt(1 - (--k * k));
     };
 
-    var CircularInOut = function (k) {
+    const CircularInOut = function (k) {
         if ((k *= 2) < 1) return -0.5 * (Math.sqrt(1 - k * k) - 1);
         return 0.5 * (Math.sqrt(1 - (k -= 2) * k) + 1);
     };
 
-    var ElasticIn = function (k) {
-        var s, a = 0.1, p = 0.4;
+    const ElasticIn = function (k) {
+        const p = 0.4;
+        let s, a = 0.1;
         if (k === 0) return 0;
         if (k === 1) return 1;
         if (!a || a < 1) {
@@ -588,8 +590,9 @@ pc.extend(pc, function () {
         return -(a * Math.pow(2, 10 * (k -= 1)) * Math.sin((k - s) * (2 * Math.PI) / p));
     };
 
-    var ElasticOut = function (k) {
-        var s, a = 0.1, p = 0.4;
+    const ElasticOut = function (k) {
+        const p = 0.4;
+        let s, a = 0.1;
         if (k === 0) return 0;
         if (k === 1) return 1;
         if (!a || a < 1) {
@@ -598,8 +601,9 @@ pc.extend(pc, function () {
         return (a * Math.pow(2, -10 * k) * Math.sin((k - s) * (2 * Math.PI) / p) + 1);
     };
 
-    var ElasticInOut = function (k) {
-        var s, a = 0.1, p = 0.4;
+    const ElasticInOut = function (k) {
+        const p = 0.4;
+        let s, a = 0.1;
         if (k === 0) return 0;
         if (k === 1) return 1;
         if (!a || a < 1) {
@@ -609,23 +613,23 @@ pc.extend(pc, function () {
         return a * Math.pow(2, -10 * (k -= 1)) * Math.sin((k - s) * (2 * Math.PI) / p) * 0.5 + 1;
     };
 
-    var BackIn = function (k) {
-        var s = 1.70158;
+    const BackIn = function (k) {
+        const s = 1.70158;
         return k * k * ((s + 1) * k - s);
     };
 
-    var BackOut = function (k) {
-        var s = 1.70158;
+    const BackOut = function (k) {
+        const s = 1.70158;
         return --k * k * ((s + 1) * k + s) + 1;
     };
 
-    var BackInOut = function (k) {
-        var s = 1.70158 * 1.525;
+    const BackInOut = function (k) {
+        const s = 1.70158 * 1.525;
         if ((k *= 2) < 1) return 0.5 * (k * k * ((s + 1) * k - s));
         return 0.5 * ((k -= 2) * k * ((s + 1) * k + s) + 2);
     };
 
-    var BounceOut = function (k) {
+    const BounceOut = function (k) {
         if (k < (1 / 2.75)) {
             return 7.5625 * k * k;
         } else if (k < (2 / 2.75)) {
@@ -637,11 +641,11 @@ pc.extend(pc, function () {
 
     };
 
-    var BounceIn = function (k) {
+    const BounceIn = function (k) {
         return 1 - BounceOut(1 - k);
     };
 
-    var BounceInOut = function (k) {
+    const BounceInOut = function (k) {
         if (k < 0.5) return BounceIn(k * 2) * 0.5;
         return BounceOut(k * 2 - 1) * 0.5 + 0.5;
     };
@@ -689,7 +693,7 @@ pc.extend(pc, function () {
     pc.AppBase.prototype.addTweenManager = function () {
         this._tweenManager = new pc.TweenManager(this);
 
-        this.on("update", function (dt) {
+        this.on('update', function (dt) {
             this._tweenManager.update(dt);
         });
     };
@@ -701,7 +705,7 @@ pc.extend(pc, function () {
 
     // Add pc.Entity#tween method
     pc.Entity.prototype.tween = function (target, options) {
-        var tween = this._app.tween(target);
+        const tween = this._app.tween(target);
         tween.entity = this;
 
         this.once('destroy', tween.stop, tween);
@@ -714,7 +718,7 @@ pc.extend(pc, function () {
     };
 
     // Create a default tween manager on the AppBase
-    var AppBase = pc.AppBase.getApplication();
+    const AppBase = pc.AppBase.getApplication();
     if (AppBase) {
         AppBase.addTweenManager();
     }
