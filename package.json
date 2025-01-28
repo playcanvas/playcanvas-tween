@@ -1,6 +1,7 @@
 {
   "name": "playcanvas-tween",
   "version": "1.1.0",
+  "type": "module",
   "author": "PlayCanvas <support@playcanvas.com>",
   "homepage": "https://playcanvas.com",
   "description": "Tween library for PlayCanvas engine",
@@ -21,11 +22,16 @@
   },
   "devDependencies": {
     "@playcanvas/eslint-config": "^2.0.8",
-    "eslint": "^9.18.0",
-    "globals": "^15.14.0"
+    "eslint": "^9.19.0",
+    "globals": "^15.14.0",
+    "rollup": "^4.32.1"
   },
   "scripts": {
-    "lint": "eslint tween.js",
-    "test": "start test/index.html"
+    "lint": "eslint src",
+    "test": "start test/index.html",
+    "build": "rollup -c rollup.config.js"
+  },
+  "peerDependencies": {
+    "playcanvas": "^2.4.3"
   }
 }
