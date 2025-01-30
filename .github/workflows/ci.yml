@@ -40,5 +40,29 @@ jobs:
     - name: Lint
       run: npm run lint
 
+  test:
+    name: Test
+    runs-on: ubuntu-latest
+
+    timeout-minutes: 10
+
+    strategy:
+      matrix:
+        node-version: [18.x]
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v3
+      with:
+        node-version: ${{ matrix.node-version }}
+        cache: 'npm'
+
+    - name: Install
+      run: npm ci
+
     - name: Test
-      run: npm test
+      run: npm run test
+
