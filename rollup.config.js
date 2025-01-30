@@ -3,7 +3,7 @@ export default [
         input: 'src/index.js',
         external: ['playcanvas'],
         output: {
-            file: 'dist/tween.js',
+            file: 'dist/tween.mjs',
             format: 'esm'
         },
         treeshake: {

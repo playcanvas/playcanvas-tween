@@ -1,6 +1,6 @@
 import * as easing from './easing.js';
 
-import { addTweenExtensions } from './index.js';
+import { addTweenExtensions, getTweenManager } from './index.js';
 
 if (!globalThis.pc) {
     throw new Error('There is no global `pc` playcanvas object.');
@@ -11,3 +11,7 @@ Object.assign(globalThis.pc, easing);
 
 // Extend the Entity and AppBase prototypes with tween methods
 addTweenExtensions(globalThis.pc);
+
+globalThis.pc.AppBase.prototype.addTweenManager = function () {
+    this._tweenManager = getTweenManager(this);
+};
