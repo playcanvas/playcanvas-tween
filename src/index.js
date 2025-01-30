@@ -13,16 +13,18 @@ const managers = new Map();
  * @param {AppBase} app - The playcanvas application to register with the Tween Manager
  * @returns {TweenManager} - The registered TweenManager
  */
-const getTweenManager = (app) => {
+export const getTweenManager = (app) => {
 
     if (!app || !(app instanceof AppBase)) {
-        throw new Error('`addTweenManager` expects an instance of ``AppBase`');
+        throw new Error('`getTweenManager` expects an instance of `AppBase`');
     }
 
     if (!managers.has(app)) {
         const tweenManager = new TweenManager();
         managers.set(app, tweenManager);
-        app.on('update', dt => tweenManager.update(dt));
+        app.on('update', (dt) => {
+            tweenManager.update(dt);
+        });
         app.on('destroy', () => managers.delete(app));
     }
 

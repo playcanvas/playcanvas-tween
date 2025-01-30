@@ -22,13 +22,16 @@
   },
   "devDependencies": {
     "@playcanvas/eslint-config": "^2.0.8",
+    "chai": "^5.1.2",
     "eslint": "^9.19.0",
     "globals": "^15.14.0",
+    "jsdom": "^26.0.0",
+    "mocha": "^11.1.0",
     "rollup": "^4.32.1"
   },
   "scripts": {
     "lint": "eslint src",
-    "test": "start test/index.html",
+    "test": "mocha test/**/*.test.js --timeout 10000",
     "build": "rollup -c rollup.config.js"
   },
   "peerDependencies": {
