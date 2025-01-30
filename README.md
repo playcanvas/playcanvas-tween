@@ -1,6 +1,6 @@
 # Overview
 
-This is a tween library for PlayCanvas. You can include `tween.js` in your Project to start using the library.
+This is a tween library for PlayCanvas. You can include `tween.js` in your Editor Project to start using the library.
 
 If you create your application *after* loading this library, you can call the following method to enable
 tweening on your application:
@@ -10,6 +10,10 @@ app.addTweenManager();
 ```
 
 # Usage
+
+## Editor 
+
+Copy the the [tween.umd.js](./dist/tween.umd.js) file from the build directory into your editor project
 
 Tweening `pc.Entity` properties looks like this:
 
@@ -48,6 +52,32 @@ var data = {
 // that are common between the target and the source object
 // will be tweened
 app.tween(data).to({value: 1}, 1.0, pc.BackOut);
+```
+
+## ESM 
+
+You can also use this library as an ES Module, either from withing an ESM Script or an engine only project
+
+Save the esm [`tween.mjs`](./dist/tween.mjs) to your project and import it.
+
+```javascript
+import { tweenEntity, SineOut } from './tween.mjs'
+
+tweenEntity(entity, entity.getLocalPosition())
+    .to({x: 10}, 1.0, SineOut));
+```
+
+The ESM won't automatically add `tween()` methods to Entity and Application, however you can manually add these using `addTweenExtensions(pc)`
+
+```javascript
+import { addTweenExtensions, SineOut } from './tween.mjs'
+import * as pc from 'playcanvas'
+
+// Adds .tween() to Entity and Application
+addTweenExtensions(pc);
+
+entity.tween(entity.getLocalPosition())
+    .to({x: 10}, 1.0, SineOut));
 ```
 
 # Chaining
